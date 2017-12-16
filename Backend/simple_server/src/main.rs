@@ -3,16 +3,20 @@
 
 extern crate rocket;
 
+use std::io;
+use std::path::{Path, PathBuf};
+
+use rocket::response::NamedFile;
+
 #[get("/")]
-fn index() -> &'static str {
-	"Hello, world!"
+fn index() -> io::Result<NamedFile> {
+	NamedFile::open("static/index.html")
 }
 
-#[get("/test")]
-fn test() -> &'static str {
-	"This is the test page"
+fn rocket() -> rocket::Rocket {
+	rocket::ignite().mount("/", routes![index])
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index, test]).launch();
+    rocket().launch();
 }
