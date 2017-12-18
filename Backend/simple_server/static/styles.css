@@ -1,0 +1,26 @@
+html, body {
+  /* background-color: gray; */
+  display: grid;
+
+  grid-template-areas: "navbar" "page";
+  grid-template-rows: 60px auto;
+
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+navbar {
+  grid-area: navbar;
+  border-style:double;
+  border-color: blue;
+
+  padding: 5px;
+}
+
+page {
+  grid-area: page;
+  border-style: double;
+  border-color: red;
+}

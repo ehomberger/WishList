@@ -13,8 +13,13 @@ fn index() -> io::Result<NamedFile> {
 	NamedFile::open("static/index.html")
 }
 
+#[get("/<file..>")]
+fn files(file: PathBuf) -> Option<NamedFile> {
+	NamedFile::open(Path::new("static/").join(file)).ok()
+}
+
 fn rocket() -> rocket::Rocket {
-	rocket::ignite().mount("/", routes![index])
+	rocket::ignite().mount("/", routes![index, files])
 }
 
 fn main() {
